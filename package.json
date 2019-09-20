@@ -11,7 +11,10 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "dc-start": "cd ./docker && docker-compose up -d && cd -",
+    "dc-stop": "docker stop $(docker ps -a -q)",
+    "dc-kill": "docker rm $(docker ps -a -q)"
   },
   "main": "background.js",
   "dependencies": {
