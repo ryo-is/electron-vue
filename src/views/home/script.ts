@@ -17,9 +17,9 @@ export default class Home extends Vue {
   public createTableParam: CreateTableParam = {
     tableName: "",
     hashKey: "",
-    hashKeyType: "",
+    hashKeyType: "S",
     rengeKey: "",
-    rengeKeyType: ""
+    rengeKeyType: "S"
   }
   public keyTypes: KeyTypes[] = [
     {
