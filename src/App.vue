@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app
-    v-content
+    v-content.main-content
       router-view
 </template>
 
@@ -12,6 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #303030;
+
+  .main-content {
+    background-color: #ededed;
+  }
 }
 </style>
