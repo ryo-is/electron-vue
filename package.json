@@ -14,10 +14,12 @@
     "test:unit": "vue-cli-service test:unit",
     "dc-start": "cd ./docker && docker-compose up -d && cd -",
     "dc-stop": "docker stop $(docker ps -a -q)",
-    "dc-kill": "docker rm $(docker ps -a -q)"
+    "dc-kill": "docker rm $(docker ps -a -q)",
+    "dc-restart": "yarn dc-stop && yarn dc-kill && yarn dc-start"
   },
   "main": "background.js",
   "dependencies": {
+    "aws-sdk": "^2.532.0",
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
