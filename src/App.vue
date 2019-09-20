@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app#app
     v-content.main-content
       router-view
 </template>
