@@ -1,4 +1,4 @@
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue, Watch, Emit } from "vue-property-decorator"
 import { DynamoDB, Credentials } from "aws-sdk"
 import { CreateTableParam, KeyTypes } from "@/types"
 
@@ -13,6 +13,9 @@ const db: DynamoDB = new DynamoDB({
 
 @Component({})
 export default class SideMenu extends Vue {
+  public tableList: string[] = []
+  public selectedTableName: string = ""
+  public selectedTableIndex: number = null
   public createTableDialog: boolean = false
   public createTableParam: CreateTableParam = {
     tableName: "",
@@ -36,10 +39,22 @@ export default class SideMenu extends Vue {
     }
   ]
 
+  @Watch("selectedTableIndex")
+  public changeSelectedTableValue(): void {
+    this.selectedTableName = this.tableList[this.selectedTableIndex]
+    console.log(this.selectedTableName)
+    this.setSelectedTableName()
+  }
+
+  @Emit("setTableName")
+  public setSelectedTableName(): string {
+    return this.selectedTableName
+  }
+
   public async created(): Promise<void> {
     try {
       const tableList = await db.listTables().promise()
-      console.log(tableList)
+      this.tableList = tableList.TableNames
     } catch (err) {
       console.error(err)
     }
@@ -47,35 +62,40 @@ export default class SideMenu extends Vue {
 
   // Create Table in DynamoDB local
   public async createTable(): Promise<void> {
-    console.log(this.createTableParam)
-    // await db
-    //   .createTable({
-    //     TableName: "tastTable",
-    //     AttributeDefinitions: [
-    //       {
-    //         AttributeName: "id",
-    //         AttributeType: "S"
-    //       },
-    //       {
-    //         AttributeName: "record_time",
-    //         AttributeType: "S"
-    //       }
-    //     ],
-    //     KeySchema: [
-    //       {
-    //         AttributeName: "id",
-    //         KeyType: "HASH"
-    //       },
-    //       {
-    //         AttributeName: "record_time",
-    //         KeyType: "RENGE"
-    //       }
-    //     ],
-    //     ProvisionedThroughput: {
-    //       ReadCapacityUnits: 1,
-    //       WriteCapacityUnits: 1
-    //     }
-    //   })
-    //   .promise()
+    try {
+      console.log(this.createTableParam)
+      const param: DynamoDB.CreateTableInput = {
+        TableName: this.createTableParam.tableName,
+        AttributeDefinitions: [
+          {
+            AttributeName: this.createTableParam.hashKey,
+            AttributeType: this.createTableParam.hashKeyType
+          }
+        ],
+        KeySchema: [
+          {
+            AttributeName: this.createTableParam.hashKey,
+            KeyType: "HASH"
+          }
+        ],
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 1,
+          WriteCapacityUnits: 1
+        }
+      }
+      if (this.createTableParam.rengeKey !== "") {
+        param.AttributeDefinitions.push({
+          AttributeName: this.createTableParam.rengeKey,
+          AttributeType: this.createTableParam.hashKeyType
+        })
+        param.KeySchema.push({
+          AttributeName: this.createTableParam.rengeKey,
+          KeyType: "RENGE"
+        })
+      }
+      await db.createTable(param).promise()
+    } catch (err) {
+      console.error(err)
+    }
   }
 }

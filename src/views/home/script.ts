@@ -1,4 +1,6 @@
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue, Prop } from "vue-property-decorator"
 
 @Component({})
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  @Prop({ default: "" }) public tableName: string
+}

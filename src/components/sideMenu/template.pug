@@ -1,6 +1,15 @@
-v-navigation-drawer.side-menu.pt-5(absolute permanent)
-  v-row.justify-center
+v-navigation-drawer.side-menu(absolute permanent)
+  v-row.justify-center.py-5
     v-btn(color="primary" large @click="createTableDialog = true") Create Table
+  v-divider
+  v-list(shaped)
+    v-subheader Tables
+    v-list-item-group(v-model="selectedTableIndex" color="primary")
+      v-list-item(v-for="item, index in tableList", :key="index")
+        v-list-item-icon.mr-0
+          v-icon(small) table
+        v-list-item-content
+          v-list-item-title.text-left {{ item }}
 
   v-dialog(v-model="createTableDialog" width=800)
     v-card
@@ -22,5 +31,3 @@ v-navigation-drawer.side-menu.pt-5(absolute permanent)
               :items="keyTypes", item-text="text", item-value="value")
           v-col.pa-0(cols=12)
             v-btn(color="primary" large @click="createTable()") Create
-
-  

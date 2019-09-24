@@ -1,3 +1,8 @@
+export type AppVueData = {
+  toolbarColor: string
+  tableName: string
+}
+
 export type CreateTableParam = {
   tableName: string
   hashKey: string

@@ -8,23 +8,34 @@
       )
         v-toolbar-title DynamoDB Local Console
     v-content.main-content.overflow-y-auto
-      SideMenu
-      router-view
+      SideMenu(@setTableName="setTableName")
+      Home(:tableName="tableName")
 </template>
 
 <script lang="ts">
 import Vue from "vue"
+import { AppVueData } from "@/types"
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import SideMenu from "@/components/sideMenu/SideMenu.vue"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import Home from "@/views/home/Home.vue"
 
 export default Vue.extend({
   components: {
-    SideMenu
+    SideMenu,
+    Home
   },
-  data() {
+  data(): AppVueData {
     return {
-      toolbarColor: "#1867c0"
+      toolbarColor: "#1867c0",
+      tableName: ""
+    }
+  },
+  methods: {
+    setTableName(tableName: string): void {
+      this.tableName = tableName
     }
   }
 })
