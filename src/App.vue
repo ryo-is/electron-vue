@@ -30,7 +30,7 @@ export default Vue.extend({
 
   .main-content {
     background-color: #ededed;
-    padding-left: 256px;
+    padding-left: 256px !important;
   }
 }
 </style>
