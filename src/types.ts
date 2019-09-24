@@ -1,9 +1,9 @@
 export type CreateTableParam = {
   tableName: string
   hashKey: string
-  hashKeyType: string
+  hashKeyType: "S" | "N" | "B"
   rengeKey: string
-  rengeKeyType: string
+  rengeKeyType: "S" | "N" | "B"
 }
 
 export type KeyTypes = {
