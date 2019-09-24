@@ -1,8 +1,22 @@
 <template lang="pug">
   v-app#app
+    SideMenu
     v-content.main-content
       router-view
 </template>
+
+<script lang="ts">
+import Vue from "vue"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import SideMenu from "@/components/sideMenu/SideMenu.vue"
+
+export default Vue.extend({
+  components: {
+    SideMenu
+  }
+})
+</script>
 
 <style lang="scss">
 #app {
@@ -16,6 +30,7 @@
 
   .main-content {
     background-color: #ededed;
+    padding-left: 256px;
   }
 }
 </style>

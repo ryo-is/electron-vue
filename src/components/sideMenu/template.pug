@@ -1,0 +1,26 @@
+v-navigation-drawer.side-menu.pt-5(absolute permanent)
+  v-row.justify-center
+    v-btn(color="primary" large @click="createTableDialog = true") Create Table
+
+  v-dialog(v-model="createTableDialog" width=800)
+    v-card
+      v-card-title Create Table
+      v-divider
+      v-card-text.py-4
+        v-row.justify-center
+          v-col.pa-0(cols=8)
+            v-text-field(v-model="createTableParam.tableName" label="Table Name")
+          v-col.pa-0(cols=8)
+            v-text-field(v-model="createTableParam.hashKey" label="Hash Key")
+          v-col.pa-0(cols=8)
+            v-select(v-model="createTableParam.hashKeyType" label="Hash Key Type"
+              :items="keyTypes", item-text="text", item-value="value")
+          v-col.pa-0(cols=8)
+            v-text-field(v-model="createTableParam.rengeKey" label="Renge Key")
+          v-col.pa-0(cols=8)
+            v-select(v-model="createTableParam.rengeKeyType" label="Renge Key Type"
+              :items="keyTypes", item-text="text", item-value="value")
+          v-col.pa-0(cols=12)
+            v-btn(color="primary" large @click="createTable()") Create
+
+  
