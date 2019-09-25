@@ -1,3 +1,5 @@
+import DynamoDBLocalModel from "@/models/dynamodb_local_model"
+
 export type AppVueData = {
   toolbarColor: string
   tableName: string
@@ -14,4 +16,14 @@ export type CreateTableParam = {
 export type KeyTypes = {
   text: string
   value: "S" | "N" | "B"
+}
+
+export type HomeComponentState = {
+  dynamoDBLocalModel: DynamoDBLocalModel
+  tableList: string[]
+  selectedTableName: string
+  selectedTableIndex: number
+  createTableDialog: boolean
+  createTableParam: CreateTableParam
+  keyTypes: KeyTypes[]
 }
