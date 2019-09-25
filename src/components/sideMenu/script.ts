@@ -1,6 +1,7 @@
 import Vue from "vue"
 import { HomeComponentState } from "@/types"
 import DynamoDBLocalModel from "@/models/dynamodb_local_model"
+import { defaultCreateTableParam, keyTypesValue } from "./config_values"
 
 export default Vue.extend({
   data(): HomeComponentState {
@@ -10,27 +11,8 @@ export default Vue.extend({
       selectedTableName: "",
       selectedTableIndex: null,
       createTableDialog: false,
-      createTableParam: {
-        tableName: "",
-        hashKey: "",
-        hashKeyType: "S",
-        rengeKey: "",
-        rengeKeyType: "S"
-      },
-      keyTypes: [
-        {
-          text: "String",
-          value: "S"
-        },
-        {
-          text: "Number",
-          value: "N"
-        },
-        {
-          text: "Binary",
-          value: "B"
-        }
-      ]
+      createTableParam: defaultCreateTableParam,
+      keyTypes: keyTypesValue
     }
   },
   watch: {
