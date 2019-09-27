@@ -1,10 +1,10 @@
 import Vue from "vue"
-import { HomeComponentState } from "@/types"
+import { SideMenuComponentState } from "@/types"
 import DynamoDBLocalModel from "@/models/dynamodb_local_model"
 import { defaultCreateTableParam, keyTypesValue } from "./config_values"
 
 export default Vue.extend({
-  data(): HomeComponentState {
+  data(): SideMenuComponentState {
     return {
       dynamoDBLocalModel: null,
       tableList: [],
