@@ -34,6 +34,16 @@ export default class DynamoDBLocalModel {
     return tableList.TableNames
   }
 
+  // Describe table info
+  public async describeTable(
+    tableName: string
+  ): Promise<DynamoDB.TableDescription> {
+    const describeTableData: DynamoDB.Types.DescribeTableOutput = await this.dynamodb
+      .describeTable({ TableName: tableName })
+      .promise()
+    return describeTableData.Table
+  }
+
   // Create Table in DynamoDB local
   public async createTable(createTableParam: CreateTableParam): Promise<void> {
     const param: DynamoDB.CreateTableInput = {

@@ -19,6 +19,7 @@ module.exports = {
     "@typescript-eslint/no-inferrable-types": 0,
     "@typescript-eslint/camelcase": 0,
     "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/typedef": ["error"],
     "prettier/prettier": [
       "error",

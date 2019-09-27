@@ -1,4 +1,21 @@
+import { DynamoDB } from "aws-sdk"
 import DynamoDBLocalModel from "@/models/dynamodb_local_model"
+
+export type SideMenuComponentState = {
+  dynamoDBLocalModel: DynamoDBLocalModel
+  tableList: string[]
+  selectedTableName: string
+  selectedTableIndex: number
+  createTableDialog: boolean
+  createTableParam: CreateTableParam
+  keyTypes: KeyTypes[]
+}
+
+export type HomeComponentState = {
+  dynamoDBLocalModel: DynamoDBLocalModel
+  tableDescription: DynamoDB.TableDescription
+  tableHeaders: TableHeader[]
+}
 
 export type AppVueData = {
   toolbarColor: string
@@ -18,12 +35,7 @@ export type KeyTypes = {
   value: "S" | "N" | "B"
 }
 
-export type HomeComponentState = {
-  dynamoDBLocalModel: DynamoDBLocalModel
-  tableList: string[]
-  selectedTableName: string
-  selectedTableIndex: number
-  createTableDialog: boolean
-  createTableParam: CreateTableParam
-  keyTypes: KeyTypes[]
+export type TableHeader = {
+  text: string
+  value: string
 }
