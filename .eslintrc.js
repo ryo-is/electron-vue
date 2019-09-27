@@ -17,6 +17,7 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/no-inferrable-types": 0,
+    "@typescript-eslint/camelcase": 0,
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/typedef": ["error"],
     "prettier/prettier": [
@@ -35,10 +36,7 @@ module.exports = {
       }
     },
     {
-      files: ["*.ts", "*.tsx"],
-      rules: {
-        "@typescript-eslint/explicit-member-accessibility": ["error"]
-      }
+      files: ["*.ts", "*.tsx"]
     }
   ]
 }
