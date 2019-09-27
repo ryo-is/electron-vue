@@ -77,4 +77,31 @@ export default class DynamoDBLocalModel {
     }
     await this.dynamodb.createTable(param).promise()
   }
+
+  // Scan
+  public async scan(tableName: string): Promise<{ [k: string]: any }> {
+    const param: DynamoDB.DocumentClient.ScanInput = {
+      TableName: tableName,
+      Limit: 300
+    }
+    const scanData: DynamoDB.DocumentClient.ScanOutput = await this.documentClient
+      .scan(param)
+      .promise()
+    return scanData.Items
+  }
+
+  // Query
+  public async query(): Promise<{ [k: string]: any }> {
+    const param: DynamoDB.DocumentClient.QueryInput = {
+      TableName: "",
+      KeyConditionExpression: "",
+      ExpressionAttributeNames: {},
+      ExpressionAttributeValues: {}
+    }
+    const queryData: DynamoDB.DocumentClient.QueryOutput = await this.documentClient
+      .query(param)
+      .promise()
+    console.log(queryData)
+    return queryData.Items
+  }
 }

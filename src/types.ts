@@ -15,6 +15,7 @@ export type HomeComponentState = {
   dynamoDBLocalModel: DynamoDBLocalModel
   tableDescription: DynamoDB.TableDescription
   tableHeaders: TableHeader[]
+  tableItems: { [k: string]: any }
 }
 
 export type AppVueData = {
