@@ -6,4 +6,5 @@ v-container.home
         :headers="tableHeaders",
         :items="tableItems"
         :footer-props="{itemsPerPageOptions: [50, 100, 150, -1]}"
+        @click:row="onRowClick"
       )

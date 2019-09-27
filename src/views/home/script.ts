@@ -63,5 +63,10 @@ export default Vue.extend({
     } catch (err) {
       console.error(err)
     }
+  },
+  methods: {
+    onRowClick(event: any): void {
+      console.log(event)
+    }
   }
 })
