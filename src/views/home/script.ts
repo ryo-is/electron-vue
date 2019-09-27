@@ -13,15 +13,36 @@ export default Vue.extend({
     return {
       dynamoDBLocalModel: null,
       tableDescription: null,
-      tableHeaders: []
+      tableHeaders: [],
+      tableItems: null
     }
   },
   watch: {
     async tableName(): Promise<void> {
-      this.tableDescription = await this.dynamoDBLocalModel.describeTable(
-        this.tableName
-      )
-      console.log(this.tableDescription)
+      if (this.tableName !== "") {
+        try {
+          this.tableHeaders = []
+          this.tableItems = []
+          this.tableDescription = await this.dynamoDBLocalModel.describeTable(
+            this.tableName
+          )
+          console.log(this.tableDescription)
+          for (
+            let i: number = 0;
+            i < this.tableDescription.KeySchema.length;
+            i++
+          ) {
+            this.tableHeaders.push({
+              text: this.tableDescription.KeySchema[i].AttributeName,
+              value: this.tableDescription.KeySchema[i].AttributeName
+            })
+          }
+          this.tableItems = await this.dynamoDBLocalModel.scan(this.tableName)
+          console.log(this.tableItems)
+        } catch (err) {
+          console.error(err)
+        }
+      }
     }
   },
   async created() {

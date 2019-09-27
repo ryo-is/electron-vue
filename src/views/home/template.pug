@@ -1,2 +1,9 @@
 v-container.home
   .display-1.my-10 {{ tableName }}
+  v-row.justify-center(v-if="tableName")
+    v-col(cols=11)
+      v-data-table(
+        :headers="tableHeaders",
+        :items="tableItems"
+        :footer-props="{itemsPerPageOptions: [50, 100, 150, -1]}"
+      )
