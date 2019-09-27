@@ -1,6 +1,6 @@
 import Vue from "vue"
 import DynamoDBLocalModel from "@/models/dynamodb_local_model"
-import { HomeComponentState } from "@/types"
+import { HomeComponentState, TableHeader } from "@/types"
 
 export default Vue.extend({
   props: {
@@ -39,6 +39,18 @@ export default Vue.extend({
           }
           this.tableItems = await this.dynamoDBLocalModel.scan(this.tableName)
           console.log(this.tableItems)
+          Object.keys(this.tableItems[0]).forEach((key: string) => {
+            if (
+              this.tableHeaders.findIndex((item: TableHeader) => {
+                return item.text === key
+              }) < 0
+            ) {
+              this.tableHeaders.push({
+                text: key,
+                value: key
+              })
+            }
+          })
         } catch (err) {
           console.error(err)
         }
